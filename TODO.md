@@ -11,7 +11,7 @@ steps, we aim to build a robust, future-proof application that meets the demands
 - **Description:** Set up and integrate Spring WebFlux for reactive, non-blocking web services in the Photon project. Transitioning to Spring WebFlux will make the use of Apache HTTP Components redundant.
 
 ### Steps:
-1. **Add Dependencies:** Include Spring WebFlux dependencies in your `pom.xml` or `build.gradle` file.
+1. **Add Dependencies:** Include Spring WebFlux dependencies in your `pom.xml` or `build.gradle` file. [x]
 2. **Create Configuration Class:** Set up a configuration class for WebFlux by extending `AbstractReactiveWebInitializer` or using annotations like `@EnableWebFlux`.
 3. **Replace Apache HTTP Components:** Refactor code to replace any usage of Apache HTTP Components with Spring WebFlux's `WebClient` for non-blocking HTTP calls.
 4. **Define Reactive Controllers:** Refactor existing controllers to be reactive by returning `Mono<T>` or `Flux<T>` from methods.
