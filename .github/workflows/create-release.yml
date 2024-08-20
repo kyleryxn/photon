@@ -1,0 +1,65 @@
+name: Create Release
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  create_release:
+    name: Create Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run Maven Build Workflow
+        uses: kyleryxn/photon/.github/workflows/maven-build.yml@main
+
+      - name: Extract project version from pom.xml
+        id: extract_version
+        run: |
+          version=$(grep -oP '(?<=<version>)[^<]+' pom.xml | sed -n 2p)
+          if [ -z "$version" ]; then
+            echo "Failed to extract version from pom.xml"
+            exit 1
+          fi
+          echo "VERSION=$version" >> $GITHUB_ENV
+
+      - name: Check if version has changed or if it's the first release
+        id: check_version
+        run: |
+          if git describe --tags --abbrev=0 >/dev/null 2>&1; then
+            latest_tag=$(git describe --tags --abbrev=0)
+            latest_version=${latest_tag#v}
+            if [ "$latest_version" = "$VERSION" ]; then
+              echo "Version has not changed, skipping release."
+              exit 0
+            fi
+          else
+            echo "No tags found, creating the first release."
+          fi
+
+      - name: Create Release
+        if: ${{ steps.check_version.outcome == 'success' }}
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ env.VERSION }}
+          release_name: Release ${{ env.VERSION }}
+          body: |
+            Photon release ${{ env.VERSION }} is now available.
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Assets
+        if: ${{ steps.create_release.outcome == 'success' }}
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: target/photon-${{ env.VERSION }}.jar
+          asset_name: photon-${{ env.VERSION }}.jar
+          asset_content_type: application/java-archive
