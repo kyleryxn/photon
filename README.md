@@ -1,5 +1,7 @@
 # Photon
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Photon emerged from the creative depths of a job interview hackathon, where an ingenious idea sparked the birth of a 
 web crawling marvel. Originally conceived as a humble project, its evolution from the primitive prototype to its current 
 form was marked by a journey of innovation and refinement. Before Photon, there was PictoCrawl, a precursor that laid 
