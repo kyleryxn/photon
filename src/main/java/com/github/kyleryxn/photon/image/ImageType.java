@@ -22,7 +22,7 @@ public enum ImageType {
         return Arrays.stream(ImageType.values())
                 .filter(image -> image.getMimeType().equalsIgnoreCase(type))
                 .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElse(ImageType.DEFAULT);
     }
 
     public String getMimeType() {
