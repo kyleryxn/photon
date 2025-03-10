@@ -59,33 +59,7 @@ None
 
 ---
 
-## 3. Integrate Apache Camel
-
-- **File:** [CamelConfiguration.java](path/to/CamelConfiguration.java)
-- **Description:** Integrate Apache Camel to manage routing and mediation rules for data exchange within the Photon project.
-
-### Steps:
-1. **Add Dependencies:** Include Apache Camel dependencies in your `pom.xml` or `build.gradle` file.
-2. **Set Up Camel Context:** Configure the Camel context in a Spring configuration class or use `@Configuration` annotation to define routes.
-3. **Create Camel Routes:** Implement Camel routes to define how data flows through your system, including endpoints for file, HTTP, JMS, etc.
-4. **Configure Camel Components:** Set up Camel components needed for your routes, such as HTTP clients, file systems, or messaging brokers.
-5. **Test Routes:** Write unit and integration tests for Camel routes to ensure they function correctly.
-6. **Handle Exceptions:** Implement error handling in Camel routes using `doTry()`, `doCatch()`, and `doFinally()` blocks.
-7. **Monitor Routes:** Use tools like Hawtio or JMX to monitor and manage Camel routes in real-time.
-8. **Integrate with Kafka:** If using Kafka, create routes that interact with Kafka topics.
-9. **Optimize Routes:** Review and optimize routes for performance, ensuring minimal overhead in data processing.
-10. **Review and Merge:** Perform a code review, then merge the Camel integration changes into the main branch.
-
-### Additional Notes:
-- Camel provides extensive components; choose the most efficient ones for your needs.
-- Consider load balancing or throttling for high-throughput routes.
-
-### Related Issues:
-- [Issue #789](link-to-issue) - Apache Camel routing
-
----
-
-## 4. Integrate Docker
+## 3. Integrate Docker
 
 - **File:** [Dockerfile](path/to/Dockerfile)
 - **Description:** Containerize the Photon project using Docker for consistent deployment and scaling.
